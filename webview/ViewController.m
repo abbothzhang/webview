@@ -14,6 +14,25 @@
 
 @implementation ViewController
 
+- (IBAction)loadHtmlString:(id)sender {
+    NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+    NSURL *bundleUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    NSError *error = nil;
+    NSString *html = [[NSString alloc] initWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:&error];
+    if (error == nil) {
+        [self.mWebView loadHTMLString:html baseURL:bundleUrl];
+    }
+    
+}
+- (IBAction)loadData:(id)sender {
+    
+}
+- (IBAction)loadRequest:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.mWebView loadRequest:request];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
